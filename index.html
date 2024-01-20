@@ -60,7 +60,15 @@
       background-color: #45a049;
     }
 
-    #connectWalletButton {
+    #disconnectWalletButton {
+      background-color: #FF0000; /* Red color for Disconnect Wallet button */
+    }
+
+    #disconnectWalletButton:hover {
+      background-color: #a04549;
+    }
+
+    #connectWalletButton, #disconnectWalletButton {
       margin-left: 10px;
     }
 
@@ -91,6 +99,7 @@
       <button id="joinTelegramButton" onclick="joinTelegramGroup()">Join All Things Pulse TG</button>
       <div class="divider"></div>
       <button id="connectWalletButton" onclick="connectWallet()">Connect Wallet</button>
+      <button id="disconnectWalletButton" onclick="disconnectWallet()">Disconnect Wallet</button>
     </div>
     <div id="walletStatus">
       Wallet Not Connected
@@ -117,6 +126,10 @@
         console.error('Error connecting to MetaMask:', error);
         alert('Error connecting to MetaMask. Check the console for details.');
       }
+    }
+
+    function disconnectWallet() {
+      displayWalletStatus(false);
     }
 
     function displayWalletStatus(isConnected) {
