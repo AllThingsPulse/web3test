@@ -109,7 +109,7 @@
           // Prompt the user to connect their wallet (for older versions of MetaMask)
           await window.web3.currentProvider.enable();
           displayWalletStatus(true);
-        else {
+        } else {
           displayWalletStatus(false);
           alert('MetaMask not detected. Please install MetaMask to connect.');
         }
