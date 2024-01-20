@@ -3,9 +3,65 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Web3 Telegram Group</title>
-  <!-- Add any additional meta tags, styles, or scripts here -->
+  <title>All Things Pulse Web3 Demo</title>
   <style>
+    body {
+      background-color: #f5f5f5;
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #app {
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      width: 100%;
+    }
+
+    h1 {
+      color: #333333;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    p {
+      color: #555555;
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 5px;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    #connectWalletButton {
+      margin-left: 10px;
+    }
+
     #walletStatus {
       margin-top: 10px;
       font-weight: bold;
@@ -13,11 +69,11 @@
     }
 
     .connected {
-      color: green;
+      color: #4CAF50;
     }
 
     .not-connected {
-      color: red;
+      color: #FF0000;
     }
   </style>
 </head>
@@ -25,8 +81,10 @@
   <div id="app">
     <h1>Welcome to All Things Pulse Web3 Demo!</h1>
     <p>Click the button below to join our Telegram Group:</p>
-    <button id="joinTelegramButton" onclick="joinTelegramGroup()">Join All Things Pulse TG</button>
-    <button id="connectWalletButton" onclick="connectWallet()">Connect to MetaMask</button>
+    <div>
+      <button id="joinTelegramButton" onclick="joinTelegramGroup()">Join All Things Pulse TG</button>
+      <button id="connectWalletButton" onclick="connectWallet()">Connect to MetaMask</button>
+    </div>
     <div id="walletStatus">
       <!-- Wallet status will be displayed here -->
     </div>
@@ -34,36 +92,36 @@
 
   <script>
     async function connectWallet() {
-        try {
-            // Check if ethereum object is present
-            if (typeof window.ethereum !== 'undefined') {
-                // Prompt the user to connect their wallet
-                await window.ethereum.request({ method: 'eth_requestAccounts' });
-                displayWalletStatus(true);
-            } else if (window.web3) {
-                // Prompt the user to connect their wallet (for older versions of MetaMask)
-                await window.web3.currentProvider.enable();
-                displayWalletStatus(true);
-            } else {
-                displayWalletStatus(false);
-                alert('MetaMask not detected. Please install MetaMask to connect.');
-            }
-        } catch (error) {
-            console.error('Error connecting to MetaMask:', error);
-            alert('Error connecting to MetaMask. Check the console for details.');
+      try {
+        // Check if ethereum object is present
+        if (typeof window.ethereum !== 'undefined') {
+          // Prompt the user to connect their wallet
+          await window.ethereum.request({ method: 'eth_requestAccounts' });
+          displayWalletStatus(true);
+        } else if (window.web3) {
+          // Prompt the user to connect their wallet (for older versions of MetaMask)
+          await window.web3.currentProvider.enable();
+          displayWalletStatus(true);
+        } else {
+          displayWalletStatus(false);
+          alert('MetaMask not detected. Please install MetaMask to connect.');
         }
+      } catch (error) {
+        console.error('Error connecting to MetaMask:', error);
+        alert('Error connecting to MetaMask. Check the console for details.');
+      }
     }
 
     function displayWalletStatus(isConnected) {
-        const walletStatus = document.getElementById('walletStatus');
-        walletStatus.className = isConnected ? 'connected' : 'not-connected';
-        walletStatus.textContent = isConnected ? 'Wallet Connected' : 'Wallet Not Connected';
+      const walletStatus = document.getElementById('walletStatus');
+      walletStatus.className = isConnected ? 'connected' : 'not-connected';
+      walletStatus.textContent = isConnected ? 'Wallet Connected' : 'Wallet Not Connected';
     }
 
     function joinTelegramGroup() {
-        // Replace the URL with your Telegram Group link
-        var telegramGroupLink = 'https://t.me/allthingspulse';
-        window.open(telegramGroupLink, '_blank');
+      // Replace the URL with your Telegram Group link
+      var telegramGroupLink = 'https://t.me/allthingspulse';
+      window.open(telegramGroupLink, '_blank');
     }
   </script>
 </body>
