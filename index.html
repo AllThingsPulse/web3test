@@ -29,14 +29,15 @@
 
     h1 {
       color: #ffffff;
-      font-size: 32px;
-      text-shadow: 2px 2px 4px #000000;
+      font-size: 40px; /* Increased font size */
+      text-shadow: 5px 5px 8px #000000; /* Further enhanced shadow effect */
       margin-bottom: 20px;
     }
 
     p {
-      color: #555555;
+      color: black; /* Changed paragraph text color to black */
       font-size: 16px;
+      font-weight: bold; /* Made paragraph text bold */
       margin-bottom: 20px;
     }
 
@@ -108,7 +109,7 @@
           // Prompt the user to connect their wallet (for older versions of MetaMask)
           await window.web3.currentProvider.enable();
           displayWalletStatus(true);
-        } else {
+        else {
           displayWalletStatus(false);
           alert('MetaMask not detected. Please install MetaMask to connect.');
         }
