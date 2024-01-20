@@ -66,14 +66,11 @@
       margin-top: 10px;
       font-weight: bold;
       font-size: 18px;
+      color: #FF0000; /* Red color for "Wallet Not Connected" */
     }
 
     .connected {
-      color: #4CAF50;
-    }
-
-    .not-connected {
-      color: #FF0000;
+      color: #4CAF50; /* Green color for "Wallet Connected" */
     }
   </style>
 </head>
@@ -86,7 +83,7 @@
       <button id="connectWalletButton" onclick="connectWallet()">Connect to MetaMask</button>
     </div>
     <div id="walletStatus">
-      <!-- Wallet status will be displayed here -->
+      Wallet Not Connected
     </div>
   </div>
 
@@ -114,7 +111,7 @@
 
     function displayWalletStatus(isConnected) {
       const walletStatus = document.getElementById('walletStatus');
-      walletStatus.className = isConnected ? 'connected' : 'not-connected';
+      walletStatus.className = isConnected ? 'connected' : '';
       walletStatus.textContent = isConnected ? 'Wallet Connected' : 'Wallet Not Connected';
     }
 
