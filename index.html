@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web3 Telegram Group</title>
+  <!-- Add any additional meta tags, styles, or scripts here -->
+</head>
+<body>
+  <div id="app">
+    <h1>Welcome to our Web3 Telegram Group!</h1>
+    <p>Click the button below to join our Telegram Group:</p>
+    <button id="joinTelegramButton" onclick="joinTelegramGroup()">Join All Things Pulse TG</button>
+    <button id="connectWalletButton" onclick="connectWallet()">Connect to MetaMask</button>
+  </div>
+
+<script>
+    async function connectWallet() {
+        try {
+            // Check if ethereum object is present
+            if (typeof window.ethereum !== 'undefined') {
+                // Prompt the user to connect their wallet
+                await window.ethereum.request({ method: 'eth_requestAccounts' });
+                console.log('Connected to MetaMask');
+            } else if (window.web3) {
+                // Prompt the user to connect their wallet (for older versions of MetaMask)
+                await window.web3.currentProvider.enable();
+                console.log('Connected to MetaMask');
+            } else {
+                alert('MetaMask not detected. Please install MetaMask to connect.');
+            }
+        } catch (error) {
+            console.error('Error connecting to MetaMask:', error);
+            alert('Error connecting to MetaMask. Check the console for details.');
+        }
+    }
+
+    function joinTelegramGroup() {
+        // Replace the URL with your Telegram Group link
+        var telegramGroupLink = 'https://t.me/allthingspulse';
+        window.open(telegramGroupLink, '_blank');
+    }
+</script>
+</body>
+</html>
