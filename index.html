@@ -8,11 +8,16 @@
   <style>
     #walletStatus {
       margin-top: 10px;
+      font-weight: bold;
+      font-size: 18px;
     }
 
-    #walletStatus img {
-      width: 20px; /* Adjust the width as needed */
-      margin-right: 5px;
+    .connected {
+      color: green;
+    }
+
+    .not-connected {
+      color: red;
     }
   </style>
 </head>
@@ -23,7 +28,7 @@
     <button id="joinTelegramButton" onclick="joinTelegramGroup()">Join All Things Pulse TG</button>
     <button id="connectWalletButton" onclick="connectWallet()">Connect to MetaMask</button>
     <div id="walletStatus">
-      <!-- Wallet status imagery will be displayed here -->
+      <!-- Wallet status will be displayed here -->
     </div>
   </div>
 
@@ -51,9 +56,8 @@
 
     function displayWalletStatus(isConnected) {
         const walletStatus = document.getElementById('walletStatus');
-        walletStatus.innerHTML = isConnected
-          ? '<img src="connected-icon.png" alt="Connected"> Wallet Connected'
-          : '<img src="disconnected-icon.png" alt="Not Connected"> Wallet Not Connected';
+        walletStatus.className = isConnected ? 'connected' : 'not-connected';
+        walletStatus.textContent = isConnected ? 'Wallet Connected' : 'Wallet Not Connected';
     }
 
     function joinTelegramGroup() {
