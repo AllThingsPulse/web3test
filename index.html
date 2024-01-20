@@ -5,6 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Web3 Telegram Group</title>
   <!-- Add any additional meta tags, styles, or scripts here -->
+  <style>
+    #walletStatus {
+      margin-top: 10px;
+    }
+
+    #walletStatus img {
+      width: 20px; /* Adjust the width as needed */
+      margin-right: 5px;
+    }
+  </style>
 </head>
 <body>
   <div id="app">
@@ -12,21 +22,25 @@
     <p>Click the button below to join our Telegram Group:</p>
     <button id="joinTelegramButton" onclick="joinTelegramGroup()">Join All Things Pulse TG</button>
     <button id="connectWalletButton" onclick="connectWallet()">Connect to MetaMask</button>
+    <div id="walletStatus">
+      <!-- Wallet status imagery will be displayed here -->
+    </div>
   </div>
 
-<script>
+  <script>
     async function connectWallet() {
         try {
             // Check if ethereum object is present
             if (typeof window.ethereum !== 'undefined') {
                 // Prompt the user to connect their wallet
                 await window.ethereum.request({ method: 'eth_requestAccounts' });
-                console.log('Connected to MetaMask');
+                displayWalletStatus(true);
             } else if (window.web3) {
                 // Prompt the user to connect their wallet (for older versions of MetaMask)
                 await window.web3.currentProvider.enable();
-                console.log('Connected to MetaMask');
+                displayWalletStatus(true);
             } else {
+                displayWalletStatus(false);
                 alert('MetaMask not detected. Please install MetaMask to connect.');
             }
         } catch (error) {
@@ -35,11 +49,18 @@
         }
     }
 
+    function displayWalletStatus(isConnected) {
+        const walletStatus = document.getElementById('walletStatus');
+        walletStatus.innerHTML = isConnected
+          ? '<img src="connected-icon.png" alt="Connected"> Wallet Connected'
+          : '<img src="disconnected-icon.png" alt="Not Connected"> Wallet Not Connected';
+    }
+
     function joinTelegramGroup() {
         // Replace the URL with your Telegram Group link
         var telegramGroupLink = 'https://t.me/allthingspulse';
         window.open(telegramGroupLink, '_blank');
     }
-</script>
+  </script>
 </body>
 </html>
