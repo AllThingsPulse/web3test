@@ -129,7 +129,7 @@
     </div>
   </div>
 
-  <script>
+<script>
     let isWalletConnected = false;
 
     async function toggleWalletConnection() {
@@ -173,6 +173,12 @@
       const connectButton = document.getElementById('connectWalletButton');
       connectButton.textContent = isConnected ? 'Disconnect Wallet' : 'Connect Wallet';
       isWalletConnected = isConnected;
+    }
+
+    function displayWalletStatus(isConnected) {
+      const walletStatus = document.getElementById('walletStatus');
+      walletStatus.className = isConnected ? 'connected' : '';
+      walletStatus.textContent = isConnected ? 'Wallet Connected' : 'Wallet Not Connected';
     }
 	
     function joinTelegramGroup() {
