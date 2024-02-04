@@ -137,7 +137,7 @@
   <div id="app">
     <div id="headerContainer">
       <h1>All Things Pulse</h1>
-      <div id="walletAddressBox" onclick="toggleWalletConnection()">Not Connected</div>
+      <div id="walletAddressBox" onclick="toggleWalletConnection()">Wallet Not Connected</div>
     </div>
     <h2>PulseChain Community Hub</h2>
     <p>Join our Telegram Group!</p>
@@ -195,7 +195,7 @@
     function displayWalletAddressBox() {
       const walletAddressBox = document.getElementById('walletAddressBox');
       if (walletAddressBox) {
-        walletAddressBox.textContent = `...${connectedWalletAddress.slice(-4)}`;
+        walletAddressBox.textContent = `0x...${connectedWalletAddress.slice(-4)}`;
         walletAddressBox.onclick = isWalletConnected ? disconnectWallet : null;
       }
     }
