@@ -153,16 +153,18 @@
     let isWalletConnected = false;
     let connectedWalletAddress = '';
 
-    // Check if wallet address is stored in localStorage
-    const storedWalletAddress = localStorage.getItem('connectedWalletAddress');
+    window.addEventListener('load', async () => {
+      // Check if wallet address is stored in localStorage
+      const storedWalletAddress = localStorage.getItem('connectedWalletAddress');
 
-    if (storedWalletAddress) {
-      // Assume the wallet is still connected on page load (you may need to use a Web3 library for this)
-      isWalletConnected = true; // Replace with actual logic to check if the wallet is connected
-      connectedWalletAddress = storedWalletAddress;
-      displayWalletStatus(true);
-      displayWalletAddressBox();
-    }
+      if (storedWalletAddress) {
+        // Assume the wallet is still connected on page load (you may need to use a Web3 library for this)
+        isWalletConnected = true; // Replace with actual logic to check if the wallet is connected
+        connectedWalletAddress = storedWalletAddress;
+        displayWalletStatus(true);
+        displayWalletAddressBox();
+      }
+    });
 
     async function toggleWalletConnection() {
       if (!isWalletConnected) {
@@ -221,5 +223,5 @@
       window.open(telegramGroupLink, '_blank');
     }
   </script>
-</body>
+  </body>
 </html>
