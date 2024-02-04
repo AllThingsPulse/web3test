@@ -50,14 +50,10 @@
       max-width: 400px;
       width: 100%;
     }
-	
+
     #headerContainer {
       position: relative;
     }
-	
-	h1 {
-	margin-bottom: 0px;
-	}
 
     h1 {
       color: #ffffff;
@@ -65,14 +61,14 @@
       text-shadow: 5px 5px 8px #000000; /* Further enhanced shadow effect */
       margin-bottom: 20px;
     }
-	
-   h2 {
+
+    h2 {
       color: #ff0040;
       font-size: 25px; /* Increased font size */
       text-shadow: 5px 5px 8px #000000; /* Further enhanced shadow effect */
       margin-bottom: 20px;
     }
-	
+
     p {
       color: #ffffff; /* Changed paragraph text color to black */
       font-size: 16px;
@@ -111,18 +107,7 @@
       margin: 20px 0;
     }
 
-    #walletStatus {
-      margin-top: 10px;
-      font-weight: bold;
-      font-size: 18px;
-      color: #FF0000; /* Red color for "Wallet Not Connected" */
-    }
-
-    .connected {
-      color: #4CAF50; /* Green color for "Wallet Connected" */
-    }
-	
-	#walletAddressBox {
+    #walletAddressBox {
       position: fixed;
       top: 10px;
       right: 10px;
@@ -130,28 +115,31 @@
       background: linear-gradient(135deg, rgba(255, 0, 64, 0.5), rgba(255, 255, 0, 0.3));
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
       border-radius: 5px;
-	  color: #333; /* Default font color */
+      color: #ff0040; /* Default font color */
       font-family: 'Arial', sans-serif; /* Default font family */
       font-size: 14px; /* Default font size */
+      font-weight: bold;
+      cursor: pointer;
+      transition: box-shadow 0.3s;
+    }
+
+    #walletAddressBox:hover {
+      box-shadow: 0 0 20px rgba(255, 0, 64, 0.5); /* Glow effect on hover */
     }
   </style>
 </head>
 <body>
   <div id="app">
-      <div id="headerContainer">
-    <h1>All Things Pulse</h1>
-    <div id="walletAddressBox">Not Connected</div>
+    <div id="headerContainer">
+      <h1>All Things Pulse</h1>
+      <div id="walletAddressBox" onclick="toggleWalletConnection"></div>
     </div>
-	<h2>PulseChain Community Hub</h2>
+    <h2>PulseChain Community Hub</h2>
     <p>Join our Telegram Group!</p>
     <div>
-      <button id="joinTelegramButton" onclick="joinTelegramGroup()">Join All Things Pulse TG</button>
+      <button id="joinTelegramButton" onclick="joinTelegramGroup()">ATP Guild ➶</button>
       <div class="divider"></div>
-      <button id="connectWalletButton" onclick="toggleWalletConnection()">Connect Wallet</button>
     </div>
-    <div id="walletStatus">
-      Wallet Not Connected
-	  </div>
   </div>
 
   <script>
@@ -175,15 +163,12 @@
 
           if (accounts.length > 0) {
             connectedWalletAddress = accounts[0];
-            displayWalletStatus(true);
             toggleConnectDisconnectButton(true);
             displayWalletAddressBox();
           } else {
-            displayWalletStatus(false);
             alert('Wallet connection canceled or no account available.');
           }
         } else {
-          displayWalletStatus(false);
           alert('Smart wallet not detected. Please install a supported wallet to connect.');
         }
       } catch (error) {
@@ -193,23 +178,14 @@
     }
 
     function toggleConnectDisconnectButton(isConnected) {
-      const connectButton = document.getElementById('connectWalletButton');
-      connectButton.textContent = isConnected ? 'Disconnect Wallet' : 'Connect Wallet';
-      connectButton.style.backgroundColor = isConnected ? '#FF0000' : '#4CAF50'; // Red for disconnect, green for connect
-      isWalletConnected = isConnected;
-    }
-
-    function displayWalletStatus(isConnected) {
-      const walletStatus = document.getElementById('walletStatus');
-      walletStatus.className = isConnected ? 'connected' : '';
-      walletStatus.textContent = isConnected ? 'Wallet Connected' : 'Wallet Not Connected';
+      // No need for this function, as the button is now part of the walletAddressBox
     }
 
     function displayWalletAddressBox() {
       const walletAddressBox = document.getElementById('walletAddressBox');
       walletAddressBox.textContent = `...${connectedWalletAddress.slice(-4)}`;
     }
-	
+
     function joinTelegramGroup() {
       // Replace the URL with your Telegram Group link
       var telegramGroupLink = 'https://guild.xyz/allthingspulse';
