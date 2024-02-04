@@ -143,65 +143,68 @@
     <div>
       <button id="joinTelegramButton" onclick="joinTelegramGroup()">Join All Things Pulse TG</button>
       <div class="divider"></div>
+    </div>
+    <div id="walletStatus">
+      Wallet Not Connected
+    </div>
   </div>
 
-<script>
-  let isWalletConnected = false;
-  let connectedWalletAddress = '';
+  <script>
+    let isWalletConnected = false;
+    let connectedWalletAddress = '';
 
-  async function toggleWalletConnection() {
-    if (isWalletConnected) {
-      alert("Please disconnect directly from your wallet.");
-    } else {
-      await connectWallet();
+    async function toggleWalletConnection() {
+      if (isWalletConnected) {
+        disconnectWallet();
+      } else {
+        await connectWallet();
+      }
     }
-  }
 
-  async function connectWallet() {
-    try {
-      // Check if the ethereum object is present
-      if (typeof window.ethereum !== 'undefined') {
-        // Prompt the user to connect their wallet
-        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+    async function connectWallet() {
+      try {
+        // Check if the ethereum object is present
+        if (typeof window.ethereum !== 'undefined') {
+          // Prompt the user to connect their wallet
+          const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
 
-        if (accounts.length > 0) {
-          connectedWalletAddress = accounts[0];
-          displayWalletStatus(true);
-          toggleConnectDisconnectButton(true);
-          displayWalletAddressBox();
+          if (accounts.length > 0) {
+            connectedWalletAddress = accounts[0];
+            displayWalletStatus(true);
+            displayWalletAddressBox();
+          } else {
+            displayWalletStatus(false);
+            alert('Wallet connection canceled or no account available.');
+          }
         } else {
           displayWalletStatus(false);
-          alert('Wallet connection canceled or no account available.');
+          alert('Smart wallet not detected. Please install a supported wallet to connect.');
         }
-      } else {
-        displayWalletStatus(false);
-        alert('Smart wallet not detected. Please install a supported wallet to connect.');
+      } catch (error) {
+        console.error('Error connecting to the wallet:', error);
+        alert('Error connecting to the wallet. Check the console for details.');
       }
-    } catch (error) {
-      console.error('Error connecting to the wallet:', error);
-      alert('Error connecting to the wallet. Check the console for details.');
     }
-  }
 
-  function toggleConnectDisconnectButton(isConnected) {
-    // No need for this function, as the button is now part of the walletAddressBox
-  }
+    function displayWalletStatus(isConnected) {
+      const walletStatus = document.getElementById('walletStatus');
+      if (walletStatus) {
+        walletStatus.className = isConnected ? 'connected' : '';
+        walletStatus.textContent = isConnected ? 'Wallet Connected' : 'Wallet Not Connected';
+      }
+    }
 
-  function displayWalletStatus(isConnected) {
-    const walletStatus = document.getElementById('walletStatus');
-    walletStatus.className = isConnected ? 'connected' : '';
-    walletStatus.textContent = isConnected ? 'Wallet Connected' : 'Wallet Not Connected';
-  }
+    function displayWalletAddressBox() {
+      const walletAddressBox = document.getElementById('walletAddressBox');
+      if (walletAddressBox) {
+        walletAddressBox.textContent = `...${connectedWalletAddress.slice(-4)}`;
+        walletAddressBox.onclick = isWalletConnected ? disconnectWallet : null;
+      }
+    }
 
-  function displayWalletAddressBox() {
-    const walletAddressBox = document.getElementById('walletAddressBox');
-    walletAddressBox.textContent = `...${connectedWalletAddress.slice(-4)}`;
-    walletAddressBox.onclick = isWalletConnected ? disconnectWallet : null;
-  }
-
-  function disconnectWallet() {
-    alert("Please disconnect directly from your wallet.");
-  }
+    function disconnectWallet() {
+      alert("Please disconnect directly from your wallet.");
+    }
 
   function joinTelegramGroup() {
     // Replace the URL with your Telegram Group link
