@@ -156,23 +156,10 @@
     const storedWalletAddress = localStorage.getItem('connectedWalletAddress');
 
     if (storedWalletAddress) {
-      // Check if the wallet is still connected using the Ethereum provider
-      window.ethereum.request({ method: 'eth_accounts' })
-        .then((accounts) => {
-          if (accounts.length > 0 && accounts[0] === storedWalletAddress) {
-            // Wallet is still connected
-            isWalletConnected = true;
-            connectedWalletAddress = storedWalletAddress;
-            displayWalletStatus(true);
-            displayWalletAddressBox();
-          } else {
-            // Wallet is disconnected, clear localStorage
-            localStorage.removeItem('connectedWalletAddress');
-          }
-        })
-        .catch((error) => {
-          console.error('Error checking wallet connection:', error);
-        });
+      isWalletConnected = true;
+      connectedWalletAddress = storedWalletAddress;
+      displayWalletStatus(true);
+      displayWalletAddressBox();
     }
 
     async function toggleWalletConnection() {
@@ -222,8 +209,7 @@
     function displayWalletAddressBox() {
       const walletAddressBox = document.getElementById('walletAddressBox');
       if (walletAddressBox) {
-        walletAddressBox.textContent = `...${connectedWalletAddress.slice(-4)}`;
-        walletAddressBox.onclick = isWalletConnected ? disconnectWallet : null;
+        walletAddressBox.textContent = isWalletConnected ? `...${connectedWalletAddress.slice(-4)}` : 'Not Connected';
       }
     }
 
@@ -232,7 +218,14 @@
       localStorage.removeItem('connectedWalletAddress');
       isWalletConnected = false;
       displayWalletStatus(false);
+      displayWalletAddressBox();
       alert("Wallet Disconnected");
+    }
+
+    function joinTelegramGroup() {
+      // Replace the URL with your Telegram Group link
+      var telegramGroupLink = 'https://guild.xyz/allthingspulse';
+      window.open(telegramGroupLink, '_blank');
     }
 	
   function joinTelegramGroup() {
