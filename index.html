@@ -134,7 +134,7 @@
 
     async function toggleWalletConnection() {
       if (isWalletConnected) {
-        alert("Please disconnect manually from MetaMask.");
+        await disconnectWallet();
       } else {
         await connectWallet();
       }
@@ -160,6 +160,20 @@
       } catch (error) {
         console.error('Error connecting to MetaMask:', error);
         alert('Error connecting to MetaMask. Check the console for details.');
+      }
+    }
+
+    async function disconnectWallet() {
+      try {
+        // Disconnect the wallet by disabling the currentProvider
+        if (typeof window.ethereum !== 'undefined') {
+          await window.ethereum.request({ method: 'wallet_requestPermissions' });
+        }
+        displayWalletStatus(false);
+        toggleConnectDisconnectButton(false);
+      } catch (error) {
+        console.error('Error disconnecting from MetaMask:', error);
+        alert('Error disconnecting from MetaMask. Check the console for details.');
       }
     }
 
