@@ -189,7 +189,7 @@ img {
     <div>
       <button id="joinTelegramButton" onclick="joinTelegramGroup()">All Things Pulse Guild <b>➶</b></button>
       <div class="divider"></div>
-    <button id="customButton" onclick="openNewPage()">Enter PulseChain</button>
+    <button id="customButton" onclick="openNewPage()">Enter</button>
   </div>
   </div>
   <div id="slideshow-container">
@@ -250,7 +250,7 @@ img {
   <script>
     function openNewPage() {
       // Change the href attribute to the path of your desired local page
-      window.location.href = 'C:/Users/girsa/OneDrive/Desktop/Web3TEST/main.html';
+      window.location.href = 'main.html';
     }
 
     let isWalletConnected = false;
@@ -285,7 +285,7 @@ img {
         }
       } catch (error) {
         console.error('Error connecting to the wallet:', error);
-        alert('Error connecting to the wallet. Check the console for details.');
+        alert('User has rejected to connect the wallet.');
       }
     }
 
