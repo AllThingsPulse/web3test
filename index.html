@@ -129,7 +129,7 @@
     </div>
   </div>
 
-<script>
+  <script>
     let isWalletConnected = false;
 
     async function toggleWalletConnection() {
@@ -164,9 +164,15 @@
     }
 
     async function disconnectWallet() {
-      // Add any disconnect logic here if needed
-      displayWalletStatus(false);
-      toggleConnectDisconnectButton(false);
+      try {
+        // Disconnect the wallet by requesting an empty eth_accounts
+        await window.ethereum.request({ method: 'eth_accounts', params: [] });
+        displayWalletStatus(false);
+        toggleConnectDisconnectButton(false);
+      } catch (error) {
+        console.error('Error disconnecting from MetaMask:', error);
+        alert('Error disconnecting from MetaMask. Check the console for details.');
+      }
     }
 
     function toggleConnectDisconnectButton(isConnected) {
