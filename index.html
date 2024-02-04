@@ -57,6 +57,7 @@
 
     h1 {
       color: #ffffff;
+      font-family: 'Helvetica', sans-serif; /* Default font family */
       font-size: 40px; /* Increased font size */
       text-shadow: 5px 5px 8px #000000; /* Further enhanced shadow effect */
       margin-bottom: 20px;
@@ -156,7 +157,8 @@
     const storedWalletAddress = localStorage.getItem('connectedWalletAddress');
 
     if (storedWalletAddress) {
-      isWalletConnected = true;
+      // Check if the wallet is still connected (you may need to use a Web3 library for this)
+      isWalletConnected = true; // Replace with actual logic to check if the wallet is connected
       connectedWalletAddress = storedWalletAddress;
       displayWalletStatus(true);
       displayWalletAddressBox();
@@ -165,6 +167,9 @@
     async function toggleWalletConnection() {
       if (!isWalletConnected) {
         await connectWallet();
+      } else {
+        // Add logic to handle disconnect if necessary
+        alert("Please disconnect directly from your wallet.");
       }
     }
 
@@ -207,7 +212,7 @@
     function displayWalletAddressBox() {
       const walletAddressBox = document.getElementById('walletAddressBox');
       if (walletAddressBox) {
-        walletAddressBox.textContent = isWalletConnected ? `...${connectedWalletAddress.slice(-4)}` : 'Wallet Not Connected';
+        walletAddressBox.textContent = isWalletConnected ? `...${connectedWalletAddress.slice(-4)}` : 'Not Connected';
       }
     }
 
