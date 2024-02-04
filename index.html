@@ -106,7 +106,8 @@
       color: #4CAF50; /* Green color for "Wallet Connected" */
     }
   </style>
-</head>
+  <script src="https://cdn.jsdelivr.net/npm/@walletconnect/web3-provider@1.5.7/dist/index.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@openzeppelin/network@5.0.3/dist/index.umd.min.js"></script>
 <body>
   <div id="app">
     <h1>Welcome to All Things Pulse Web3 Demo!</h1>
@@ -150,7 +151,6 @@
     }
 
     function joinTelegramGroup() {
-      // Replace the URL with your Telegram Group link
       var telegramGroupLink = 'https://t.me/allthingspulse';
       window.open(telegramGroupLink, '_blank');
     }
