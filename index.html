@@ -196,7 +196,7 @@
       const walletAddressBox = document.getElementById('walletAddressBox');
       if (walletAddressBox) {
         walletAddressBox.textContent = `0x...${connectedWalletAddress.slice(-4)}`;
-		walletAddressBox.style.color = isWalletConnected ? '#4CAF50' : '#ff0040';
+		walletAddressBox.style.color = isWalletConnected ? '#ffffff' : '#ff0040';
         walletAddressBox.onclick = isWalletConnected ? disconnectWallet : null;
       }
     }
