@@ -134,7 +134,7 @@
 
     async function toggleWalletConnection() {
       if (isWalletConnected) {
-        await disconnectWallet();
+        alert("Please disconnect manually from MetaMask.");
       } else {
         await connectWallet();
       }
@@ -163,21 +163,10 @@
       }
     }
 
-    async function disconnectWallet() {
-      try {
-        // Disconnect the wallet by requesting an empty eth_accounts
-        await window.ethereum.request({ method: 'eth_accounts', params: [] });
-        displayWalletStatus(false);
-        toggleConnectDisconnectButton(false);
-      } catch (error) {
-        console.error('Error disconnecting from MetaMask:', error);
-        alert('Error disconnecting from MetaMask. Check the console for details.');
-      }
-    }
-
     function toggleConnectDisconnectButton(isConnected) {
       const connectButton = document.getElementById('connectWalletButton');
       connectButton.textContent = isConnected ? 'Disconnect Wallet' : 'Connect Wallet';
+      connectButton.style.backgroundColor = isConnected ? '#FF0000' : '#4CAF50'; // Red for disconnect, green for connect
       isWalletConnected = isConnected;
     }
 
