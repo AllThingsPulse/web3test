@@ -114,7 +114,7 @@
     <div>
       <button id="joinTelegramButton" onclick="joinTelegramGroup()">Join All Things Pulse TG</button>
       <div class="divider"></div>
-      <button id="connectWalletButton" onclick="connectWallet()">Connect Wallet</button>
+      <button id="connectWalletButton" onclick="toggleWalletConnection()">Connect Wallet</button>
     </div>
     <div id="walletStatus">
       Wallet Not Connected
@@ -122,6 +122,16 @@
   </div>
 
   <script>
+    let isWalletConnected = false;
+
+    async function toggleWalletConnection() {
+      if (isWalletConnected) {
+        await disconnectWallet();
+      } else {
+        await connectWallet();
+      }
+    }
+
     async function connectWallet() {
       try {
         // Check if ethereum object is present
@@ -129,10 +139,12 @@
           // Prompt the user to connect their wallet
           await window.ethereum.request({ method: 'eth_requestAccounts' });
           displayWalletStatus(true);
+          toggleConnectDisconnectButton(true);
         } else if (window.web3) {
           // Prompt the user to connect their wallet (for older versions of MetaMask)
           await window.web3.currentProvider.enable();
           displayWalletStatus(true);
+          toggleConnectDisconnectButton(true);
         } else {
           displayWalletStatus(false);
           alert('MetaMask not detected. Please install MetaMask to connect.');
@@ -143,12 +155,18 @@
       }
     }
 
-    function displayWalletStatus(isConnected) {
-      const walletStatus = document.getElementById('walletStatus');
-      walletStatus.className = isConnected ? 'connected' : '';
-      walletStatus.textContent = isConnected ? 'Wallet Connected' : 'Wallet Not Connected';
+    async function disconnectWallet() {
+      // Add any disconnect logic here if needed
+      displayWalletStatus(false);
+      toggleConnectDisconnectButton(false);
     }
 
+    function toggleConnectDisconnectButton(isConnected) {
+      const connectButton = document.getElementById('connectWalletButton');
+      connectButton.textContent = isConnected ? 'Disconnect Wallet' : 'Connect Wallet';
+      isWalletConnected = isConnected;
+    }
+	
     function joinTelegramGroup() {
       // Replace the URL with your Telegram Group link
       var telegramGroupLink = 'https://t.me/allthingspulse';
