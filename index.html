@@ -163,9 +163,7 @@
     }
 
     async function toggleWalletConnection() {
-      if (isWalletConnected) {
-        disconnectWallet();
-      } else {
+      if (!isWalletConnected) {
         await connectWallet();
       }
     }
@@ -213,26 +211,11 @@
       }
     }
 
-    function disconnectWallet() {
-      // Remove wallet address from localStorage
-      localStorage.removeItem('connectedWalletAddress');
-      isWalletConnected = false;
-      displayWalletStatus(false);
-      displayWalletAddressBox();
-      alert("Wallet Disconnected");
-    }
-
     function joinTelegramGroup() {
       // Replace the URL with your Telegram Group link
       var telegramGroupLink = 'https://guild.xyz/allthingspulse';
       window.open(telegramGroupLink, '_blank');
     }
-	
-  function joinTelegramGroup() {
-    // Replace the URL with your Telegram Group link
-    var telegramGroupLink = 'https://guild.xyz/allthingspulse';
-    window.open(telegramGroupLink, '_blank');
-  }
 </script>
 </body>
 </html>
