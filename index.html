@@ -157,7 +157,7 @@
     const storedWalletAddress = localStorage.getItem('connectedWalletAddress');
 
     if (storedWalletAddress) {
-      // Check if the wallet is still connected (you may need to use a Web3 library for this)
+      // Assume the wallet is still connected on page load (you may need to use a Web3 library for this)
       isWalletConnected = true; // Replace with actual logic to check if the wallet is connected
       connectedWalletAddress = storedWalletAddress;
       displayWalletStatus(true);
@@ -214,12 +214,23 @@
         walletAddressBox.textContent = isWalletConnected ? `...${connectedWalletAddress.slice(-4)}` : 'Not Connected';
       }
     }
-	
+
     function joinTelegramGroup() {
       // Replace the URL with your Telegram Group link
       var telegramGroupLink = 'https://guild.xyz/allthingspulse';
       window.open(telegramGroupLink, '_blank');
     }
-</script>
+
+    // Add an event listener to handle wallet disconnection events
+    window.ethereum?.on('accountsChanged', function (accounts) {
+      if (accounts.length === 0) {
+        // Wallet disconnected
+        isWalletConnected = false;
+        localStorage.removeItem('connectedWalletAddress');
+        displayWalletStatus(false);
+        displayWalletAddressBox();
+      }
+    });
+  </script>
 </body>
 </html>
