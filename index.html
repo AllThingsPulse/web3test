@@ -168,8 +168,7 @@
       if (!isWalletConnected) {
         await connectWallet();
       } else {
-        // Add logic to handle disconnect if necessary
-        alert("Please disconnect directly from your wallet.");
+        alert("Wallet is already connected.");
       }
     }
 
@@ -215,7 +214,7 @@
         walletAddressBox.textContent = isWalletConnected ? `...${connectedWalletAddress.slice(-4)}` : 'Not Connected';
       }
     }
-
+	
     function joinTelegramGroup() {
       // Replace the URL with your Telegram Group link
       var telegramGroupLink = 'https://guild.xyz/allthingspulse';
