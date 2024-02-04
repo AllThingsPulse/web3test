@@ -148,17 +148,31 @@
     </div>
   </div>
 
-<script>
+  <script>
     let isWalletConnected = false;
     let connectedWalletAddress = '';
 
     // Check if wallet address is stored in localStorage
     const storedWalletAddress = localStorage.getItem('connectedWalletAddress');
+
     if (storedWalletAddress) {
-      isWalletConnected = true;
-      connectedWalletAddress = storedWalletAddress;
-      displayWalletStatus(true);
-      displayWalletAddressBox();
+      // Check if the wallet is still connected using the Ethereum provider
+      window.ethereum.request({ method: 'eth_accounts' })
+        .then((accounts) => {
+          if (accounts.length > 0 && accounts[0] === storedWalletAddress) {
+            // Wallet is still connected
+            isWalletConnected = true;
+            connectedWalletAddress = storedWalletAddress;
+            displayWalletStatus(true);
+            displayWalletAddressBox();
+          } else {
+            // Wallet is disconnected, clear localStorage
+            localStorage.removeItem('connectedWalletAddress');
+          }
+        })
+        .catch((error) => {
+          console.error('Error checking wallet connection:', error);
+        });
     }
 
     async function toggleWalletConnection() {
@@ -216,9 +230,11 @@
     function disconnectWallet() {
       // Remove wallet address from localStorage
       localStorage.removeItem('connectedWalletAddress');
-      alert("Please disconnect directly from your wallet.");
+      isWalletConnected = false;
+      displayWalletStatus(false);
+      alert("Wallet Disconnected");
     }
-
+	
   function joinTelegramGroup() {
     // Replace the URL with your Telegram Group link
     var telegramGroupLink = 'https://guild.xyz/allthingspulse';
