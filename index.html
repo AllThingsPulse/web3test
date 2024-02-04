@@ -153,24 +153,11 @@
     let isWalletConnected = false;
     let connectedWalletAddress = '';
 
-    window.addEventListener('load', async () => {
-      // Check if wallet address is stored in localStorage
-      const storedWalletAddress = localStorage.getItem('connectedWalletAddress');
-
-      if (storedWalletAddress) {
-        // Assume the wallet is still connected on page load (you may need to use a Web3 library for this)
-        isWalletConnected = true; // Replace with actual logic to check if the wallet is connected
-        connectedWalletAddress = storedWalletAddress;
-        displayWalletStatus(true);
-        displayWalletAddressBox();
-      }
-    });
-
     async function toggleWalletConnection() {
-      if (!isWalletConnected) {
-        await connectWallet();
+      if (isWalletConnected) {
+        disconnectWallet();
       } else {
-        alert("Wallet is already connected.");
+        await connectWallet();
       }
     }
 
@@ -183,9 +170,6 @@
 
           if (accounts.length > 0) {
             connectedWalletAddress = accounts[0];
-            // Store the connected wallet address in localStorage
-            localStorage.setItem('connectedWalletAddress', connectedWalletAddress);
-            isWalletConnected = true;
             displayWalletStatus(true);
             displayWalletAddressBox();
           } else {
@@ -213,8 +197,13 @@
     function displayWalletAddressBox() {
       const walletAddressBox = document.getElementById('walletAddressBox');
       if (walletAddressBox) {
-        walletAddressBox.textContent = isWalletConnected ? `...${connectedWalletAddress.slice(-4)}` : 'Not Connected';
+        walletAddressBox.textContent = `...${connectedWalletAddress.slice(-4)}`;
+        walletAddressBox.onclick = isWalletConnected ? disconnectWallet : null;
       }
+    }
+
+    function disconnectWallet() {
+      alert("Please disconnect directly from your wallet.");
     }
 
     function joinTelegramGroup() {
