@@ -66,9 +66,10 @@
     }
 	
     p {
-      color: #ff0040; /* Changed paragraph text color to black */
+      color: #ffffff; /* Changed paragraph text color to black */
       font-size: 16px;
       font-weight: bold; /* Made paragraph text bold */
+      text-shadow: 5px 5px 8px #000000; /* Further enhanced shadow effect */
       margin-bottom: 20px;
     }
 
@@ -112,6 +113,16 @@
     .connected {
       color: #4CAF50; /* Green color for "Wallet Connected" */
     }
+	
+	#walletAddressBox {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      padding: 10px;
+      background-color: white;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      border-radius: 5px;
+    }
   </style>
 </head>
 <body>
@@ -131,10 +142,11 @@
 
   <script>
     let isWalletConnected = false;
+    let connectedWalletAddress = '';
 
     async function toggleWalletConnection() {
       if (isWalletConnected) {
-        await disconnectWallet();
+        disconnectWallet();
       } else {
         await connectWallet();
       }
@@ -142,39 +154,23 @@
 
     async function connectWallet() {
       try {
-        // Check if ethereum object is present
-        if (typeof window.ethereum !== 'undefined') {
-          // Prompt the user to connect their wallet
-          await window.ethereum.request({ method: 'eth_requestAccounts' });
-          displayWalletStatus(true);
-          toggleConnectDisconnectButton(true);
-        } else if (window.web3) {
-          // Prompt the user to connect their wallet (for older versions of MetaMask)
-          await window.web3.currentProvider.enable();
-          displayWalletStatus(true);
-          toggleConnectDisconnectButton(true);
-        } else {
-          displayWalletStatus(false);
-          alert('MetaMask not detected. Please install MetaMask to connect.');
-        }
+        // Simulate connecting by setting a mock wallet address
+        connectedWalletAddress = '0x1234...5678'; // Replace with actual connected address
+        displayWalletStatus(true);
+        toggleConnectDisconnectButton(true);
+        displayWalletAddressBox();
       } catch (error) {
-        console.error('Error connecting to MetaMask:', error);
-        alert('Error connecting to MetaMask. Check the console for details.');
+        console.error('Error connecting:', error);
+        alert('Error connecting. Check the console for details.');
       }
     }
 
-    async function disconnectWallet() {
-      try {
-        // Disconnect the wallet by disabling the currentProvider
-        if (typeof window.ethereum !== 'undefined') {
-          await window.ethereum.request({ method: 'wallet_requestPermissions' });
-        }
-        displayWalletStatus(false);
-        toggleConnectDisconnectButton(false);
-      } catch (error) {
-        console.error('Error disconnecting from MetaMask:', error);
-        alert('Error disconnecting from MetaMask. Check the console for details.');
-      }
+    function disconnectWallet() {
+      // Simulate disconnecting by resetting the state
+      connectedWalletAddress = '';
+      displayWalletStatus(false);
+      toggleConnectDisconnectButton(false);
+      hideWalletAddressBox();
     }
 
     function toggleConnectDisconnectButton(isConnected) {
@@ -188,6 +184,16 @@
       const walletStatus = document.getElementById('walletStatus');
       walletStatus.className = isConnected ? 'connected' : '';
       walletStatus.textContent = isConnected ? 'Wallet Connected' : 'Wallet Not Connected';
+    }
+
+    function displayWalletAddressBox() {
+      const walletAddressBox = document.getElementById('walletAddressBox');
+      walletAddressBox.textContent = `...${connectedWalletAddress.slice(-4)}`;
+    }
+
+    function hideWalletAddressBox() {
+      const walletAddressBox = document.getElementById('walletAddressBox');
+      walletAddressBox.textContent = '';
     }
 	
     function joinTelegramGroup() {
