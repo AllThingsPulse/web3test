@@ -146,7 +146,7 @@
 
     async function toggleWalletConnection() {
       if (isWalletConnected) {
-        disconnectWallet();
+        alert("Disconnect functionality is not supported programmatically for all wallets. Please disconnect manually.");
       } else {
         await connectWallet();
       }
@@ -154,23 +154,28 @@
 
     async function connectWallet() {
       try {
-        // Simulate connecting by setting a mock wallet address
-        connectedWalletAddress = '0x1234...5678'; // Replace with actual connected address
-        displayWalletStatus(true);
-        toggleConnectDisconnectButton(true);
-        displayWalletAddressBox();
-      } catch (error) {
-        console.error('Error connecting:', error);
-        alert('Error connecting. Check the console for details.');
-      }
-    }
+        // Check if the ethereum object is present
+        if (typeof window.ethereum !== 'undefined') {
+          // Prompt the user to connect their wallet
+          const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
 
-    function disconnectWallet() {
-      // Simulate disconnecting by resetting the state
-      connectedWalletAddress = '';
-      displayWalletStatus(false);
-      toggleConnectDisconnectButton(false);
-      hideWalletAddressBox();
+          if (accounts.length > 0) {
+            connectedWalletAddress = accounts[0];
+            displayWalletStatus(true);
+            toggleConnectDisconnectButton(true);
+            displayWalletAddressBox();
+          } else {
+            displayWalletStatus(false);
+            alert('Wallet connection canceled or no account available.');
+          }
+        } else {
+          displayWalletStatus(false);
+          alert('Smart wallet not detected. Please install a supported wallet to connect.');
+        }
+      } catch (error) {
+        console.error('Error connecting to the wallet:', error);
+        alert('Error connecting to the wallet. Check the console for details.');
+      }
     }
 
     function toggleConnectDisconnectButton(isConnected) {
@@ -189,11 +194,6 @@
     function displayWalletAddressBox() {
       const walletAddressBox = document.getElementById('walletAddressBox');
       walletAddressBox.textContent = `...${connectedWalletAddress.slice(-4)}`;
-    }
-
-    function hideWalletAddressBox() {
-      const walletAddressBox = document.getElementById('walletAddressBox');
-      walletAddressBox.textContent = '';
     }
 	
     function joinTelegramGroup() {
