@@ -107,6 +107,17 @@
       margin: 20px 0;
     }
 
+    #walletStatus {
+      margin-top: 10px;
+      font-weight: bold;
+      font-size: 18px;
+      color: #FF0000; /* Red color for "Wallet Not Connected" */
+    }
+
+    .connected {
+      color: #4CAF50; /* Green color for "Wallet Connected" */
+    }
+
     #walletAddressBox {
       position: fixed;
       top: 10px;
@@ -132,7 +143,7 @@
   <div id="app">
     <div id="headerContainer">
       <h1>All Things Pulse</h1>
-      <div id="walletAddressBox" onclick="toggleWalletConnection"></div>
+      <div id="walletAddressBox" onclick="toggleWalletConnection">Not Connected</div>
     </div>
     <h2>PulseChain Community Hub</h2>
     <p>Join our Telegram Group!</p>
@@ -140,6 +151,9 @@
       <button id="joinTelegramButton" onclick="joinTelegramGroup()">Join All Things Pulse TG</button>
       <div class="divider"></div>
       <!-- Remove the "Connect Wallet" button from here -->
+    </div>
+    <div id="walletStatus">
+      Wallet Not Connected
     </div>
   </div>
 
@@ -164,12 +178,15 @@
 
           if (accounts.length > 0) {
             connectedWalletAddress = accounts[0];
+            displayWalletStatus(true);
             toggleConnectDisconnectButton(true);
             displayWalletAddressBox();
           } else {
+            displayWalletStatus(false);
             alert('Wallet connection canceled or no account available.');
           }
         } else {
+          displayWalletStatus(false);
           alert('Smart wallet not detected. Please install a supported wallet to connect.');
         }
       } catch (error) {
@@ -180,6 +197,12 @@
 
     function toggleConnectDisconnectButton(isConnected) {
       // No need for this function, as the button is now part of the walletAddressBox
+    }
+
+    function displayWalletStatus(isConnected) {
+      const walletStatus = document.getElementById('walletStatus');
+      walletStatus.className = isConnected ? 'connected' : '';
+      walletStatus.textContent = isConnected ? 'Wallet Connected' : 'Wallet Not Connected';
     }
 
     function displayWalletAddressBox() {
