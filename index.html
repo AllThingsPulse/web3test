@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>All Things Pulse Web3 Demo</title>
+  <title>All Things Pulse</title>
   <style>
     body {
       position: relative;
       font-family: 'Cursive', sans-serif;
       text-align: center;
-      margin: 0;
+      margin: 10px;
       padding: 0;
-      height: 100vh;
+      height: 98vh;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -32,33 +32,30 @@
       z-index: -1;
     }
 
-    .border {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      border: 10px solid #333; /* Dark grey border around the perimeter */
-      pointer-events: none; /* Allow clicking through the border */
-    }
-
     #app {
       background: linear-gradient(135deg, rgba(128, 0, 128, 0.5), rgba(255, 255, 0, 0.3));
       padding: 20px;
-      border-radius: 10px;
+	  position:absolute;
+	  top:27%;
+	  left:36%;
+      border-radius: 30px;
+	  margin: 10px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      max-width: 400px;
+      max-width: 420px;
       width: 100%;
     }
-
-    #headerContainer {
-      position: relative;
+	
+	.divider {
+      width: 100%;
+      height: 2px;
+      background-color: #333333;
+      margin: 20px 0;
     }
 
     h1 {
       color: #ffffff;
-      font-family: 'Helvetica', sans-serif; /* Default font family */
-      font-size: 40px; /* Increased font size */
+      font-family: 'Palatino, URW Palladio L', serif; /* Default font family */
+      font-size: 60px; /* Increased font size */
       text-shadow: 5px 5px 8px #000000; /* Further enhanced shadow effect */
       margin-bottom: 20px;
     }
@@ -79,7 +76,7 @@
     }
 
     button {
-      background-color: #4CAF50;
+      background-color: #0070ff;
       color: white;
       border: none;
       padding: 10px 20px;
@@ -87,25 +84,20 @@
       text-decoration: none;
       display: inline-block;
       font-size: 16px;
+	  font-weight: bold;
       margin: 5px;
       cursor: pointer;
       border-radius: 5px;
-      transition: background-color 0.3s;
+      transition: background-color 0.5s;
     }
 
     button:hover {
-      background-color: #45a049;
+      background-color: #00ccff;
+      box-shadow: 0 0 50px rgba(0, 191, 255, 5); /* Glow effect on hover */
     }
 
     #connectWalletButton {
       margin-left: 10px;
-    }
-
-    .divider {
-      width: 100%;
-      height: 2px;
-      background-color: #333333;
-      margin: 20px 0;
     }
 
     .connected {
@@ -114,23 +106,52 @@
 
     #walletAddressBox {
       position: fixed;
-      top: 10px;
-      right: 10px;
+      top: 20px;
+      right: 20px;
       padding: 10px;
-      background: linear-gradient(135deg, rgba(255, 0, 64, 0.5), rgba(255, 255, 0, 0.3));
+      background: linear-gradient(135deg, rgba(128, 0, 128, 0.5), rgba(255, 255, 0, 0.3));
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
       border-radius: 5px;
-      color: #ff0040; /* Default font color */
-      font-family: 'Helvetica', sans-serif; /* Default font family */
-      font-size: 16px; /* Default font size */
+      color: #ffffff; /* Default font color */
+      font-family: 'Palatino, URW Palladio L', serif; /* Default font family */
+      font-size: 18px; /* Default font size */
       font-weight: bold;
       cursor: pointer;
-      transition: box-shadow 0.3s;
+      transition: box-shadow 0.5s;
+      border: 1px solid #ff0040; /* Customize the border size and color */
     }
 
     #walletAddressBox:hover {
-      box-shadow: 0 0 20px rgba(255, 0, 64, 0.5); /* Glow effect on hover */
+      box-shadow: 0 0 50px rgba(255, 0, 64, 5); /* Glow effect on hover */
     }
+
+#slideshow-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  margin-top: 820px;
+  background: linear-gradient(135deg, rgba(128, 0, 128, 0.5), rgba(255, 255, 0, 0.3));
+  border: 2px solid #ff0040; /* Customize the border size and color */
+  box-shadow: 0 0 35px rgba(255, 255, 255, 5); /* Glow effect on hover */
+}
+
+.slides {
+  display: flex;
+  align-items: center; /* Center the images vertically */
+  height: 100%; /* Set the height of the slides container */
+  transition: transform 1s ease-in-out;
+}
+
+.mySlide {
+  flex: 0 0 auto;
+  width: 100%; /* Set the width of each slide */
+}
+
+img {
+  width: 5%; /* Set the width of the image within each slide */
+  height: 5%; /* Set the height of the image within each slide */
+  margin: 0 auto; /* Center the image horizontally */
+}
   </style>
 </head>
 <body>
@@ -146,7 +167,61 @@
       <div class="divider"></div>
     </div>
   </div>
-
+  <div id="slideshow-container">
+    <div class="slides" id="slides">
+      <div class="mySlide">
+        <img src="TYRH.png" alt="Slide 1">
+      </div>
+      <div class="mySlide">
+        <img src="PLS.png" alt="Slide 2">
+      </div>
+      <div class="mySlide">
+        <img src="TONI.png" alt="Slide 3">
+      </div>
+      <div class="mySlide">
+        <img src="PulseX.png" alt="Slide 4">
+      </div>
+      <div class="mySlide">
+        <img src="HEX2.png" alt="Slide 5">
+      </div>
+      <div class="mySlide">
+        <img src="HOA.png" alt="Slide 6">
+      </div>
+      <div class="mySlide">
+        <img src="Love - 2.png" alt="Slide 7">
+      </div>
+      <div class="mySlide">
+        <img src="Phiat - 2.png" alt="Slide 8">
+      </div>
+      <div class="mySlide">
+        <img src="Texan.png" alt="Slide 9">
+      </div>
+      <div class="mySlide">
+        <img src="Pulselorian.png" alt="Slide 10">
+      </div>
+      <div class="mySlide">
+        <img src="PLSP.png" alt="Slide 11">
+      </div>
+      <div class="mySlide">
+        <img src="Bear.jpg" alt="Slide 12">
+      </div>
+      <div class="mySlide">
+        <img src="9inch.jpg" alt="Slide 13">
+      </div>
+      <div class="mySlide">
+        <img src="9mm.png" alt="Slide 14">
+      </div>
+      <div class="mySlide">
+        <img src="Coast.jpg" alt="Slide 15">
+      </div>
+      <div class="mySlide">
+        <img src="GoPulse.jpg" alt="Slide 16">
+      </div>
+      <div class="mySlide">
+        <img src="LiquidLoans.jpg" alt="Slide 17">
+      </div>
+    </div>
+  </div>
   <script>
     let isWalletConnected = false;
     let connectedWalletAddress = '';
@@ -196,7 +271,7 @@
       const walletAddressBox = document.getElementById('walletAddressBox');
       if (walletAddressBox) {
         walletAddressBox.textContent = `0x...${connectedWalletAddress.slice(-4)}`;
-		walletAddressBox.style.color = isWalletConnected ? '#00fa9a' : '#ffffff';
+        walletAddressBox.style.color = isWalletConnected ? '#00fa9a' : '#ffffff';
         walletAddressBox.onclick = isWalletConnected ? disconnectWallet : null;
       }
     }
@@ -210,6 +285,39 @@
       var telegramGroupLink = 'https://guild.xyz/allthingspulse';
       window.open(telegramGroupLink, '_blank');
     }
+
+    // Slideshow functionality
+    const slides = document.getElementById('slides');
+    let slideIndex = 0;
+
+    function showSlides() {
+      // Increment index
+      slideIndex++;
+
+      // Move slides container to the left
+      slides.style.transform = `translateX(${-slideIndex * 100}%)`;
+      
+      // Check if it's the last slide
+      if (slideIndex >= slides.children.length) {
+        // Set the timeout to move instantly to the first slide without a smooth transition
+        setTimeout(() => {
+          slides.style.transition = 'none';
+          slideIndex = 0;
+          slides.style.transform = `translateX(${-slideIndex * 100}%)`;
+        }, 1000); // Adjust the time to match your transition time
+
+        // Set the timeout to enable the transition again
+        setTimeout(() => {
+          slides.style.transition = '';
+        }, 1100); // Adjust the time slightly greater than the previous timeout
+      }
+
+      // Set the timeout for the next slide
+      setTimeout(showSlides, 2000); // Change slide every 2 seconds
+    }
+
+    // Initial call to start the slideshow
+    showSlides();
   </script>
-  </body>
+</body>
 </html>
