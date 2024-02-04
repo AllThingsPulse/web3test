@@ -197,7 +197,7 @@
     function displayWalletAddressBox() {
       const walletAddressBox = document.getElementById('walletAddressBox');
       if (walletAddressBox) {
-        walletAddressBox.textContent = `...${connectedWalletAddress.slice(-4)}`;
+        walletAddressBox.textContent = `0x...${connectedWalletAddress.slice(-4)}`;
         walletAddressBox.onclick = isWalletConnected ? disconnectWallet : null;
       }
     }
