@@ -36,7 +36,7 @@
       background: linear-gradient(135deg, rgba(128, 0, 128, 0.5), rgba(255, 255, 0, 0.3));
       padding: 20px;
 	  position:absolute;
-	  top:27%;
+	  top:20%;
 	  left:36%;
       border-radius: 30px;
 	  margin: 10px;
@@ -71,7 +71,7 @@
       color: #ffffff; /* Changed paragraph text color to black */
       font-size: 16px;
       font-weight: bold; /* Made paragraph text bold */
-      text-shadow: 5px 5px 8px #000000; /* Further enhanced shadow effect */
+      text-shadow: 1px 1px 12px #ffffff; /* Further enhanced shadow effect */
       margin-bottom: 20px;
     }
 
@@ -83,17 +83,19 @@
       text-align: center;
       text-decoration: none;
       display: inline-block;
-      font-size: 16px;
+	  font-family: 'Palatino, URW Palladio L', serif;
+      font-size: 18px;
 	  font-weight: bold;
       margin: 5px;
       cursor: pointer;
       border-radius: 5px;
       transition: background-color 0.5s;
+	  box-shadow: 3px 3px 10px #000000;
     }
 
     button:hover {
       background-color: #00ccff;
-      box-shadow: 0 0 50px rgba(0, 191, 255, 5); /* Glow effect on hover */
+      box-shadow: 3px 3px 50px rgba(178, 255, 255, 5); /* Glow effect on hover */
     }
 
     #connectWalletButton {
@@ -125,14 +127,36 @@
       box-shadow: 0 0 50px rgba(255, 0, 64, 5); /* Glow effect on hover */
     }
 
+ button#customButton {
+      background-color: #f2003c; /* Customize the button color */
+      color: #ffffff; /* Customize the button text color */
+      border: none;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+	  font-family: 'Palatino, URW Palladio L', serif;
+      font-size: 18px;
+      font-weight: bold;
+      margin: 5px;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.5s;
+    }
+
+    button#customButton:hover {
+      background-color: #bf00ff; /* Customize the button color on hover */
+      box-shadow: 3px 3px 50px rgba(235, 174, 255, 15); /* Glow effect on hover */
+    }
+
 #slideshow-container {
   position: relative;
   width: 100%;
   overflow: hidden;
   margin-top: 820px;
-  background: linear-gradient(135deg, rgba(128, 0, 128, 0.5), rgba(255, 255, 0, 0.3));
-  border: 2px solid #ff0040; /* Customize the border size and color */
-  box-shadow: 0 0 35px rgba(255, 255, 255, 5); /* Glow effect on hover */
+  background: linear-gradient(135deg, rgba(128, 128, 128, 0.5), rgba(255, 255, 0, 0.3));
+  border: 1px solid #ffffff; /* Customize the border size and color */
+  box-shadow: 0 0 50px rgba(255, 255, 255, 5); /* Glow effect on hover */
 }
 
 .slides {
@@ -163,9 +187,10 @@ img {
     <h2>PulseChain Community Hub</h2>
     <p>Join our Telegram Group!</p>
     <div>
-      <button id="joinTelegramButton" onclick="joinTelegramGroup()">Join All Things Pulse TG</button>
+      <button id="joinTelegramButton" onclick="joinTelegramGroup()">All Things Pulse Guild <b>➶</b></button>
       <div class="divider"></div>
-    </div>
+    <button id="customButton" onclick="openNewPage()">Enter PulseChain</button>
+  </div>
   </div>
   <div id="slideshow-container">
     <div class="slides" id="slides">
@@ -223,6 +248,11 @@ img {
     </div>
   </div>
   <script>
+    function openNewPage() {
+      // Change the href attribute to the path of your desired local page
+      window.location.href = 'C:/Users/girsa/OneDrive/Desktop/Web3TEST/main.html';
+    }
+
     let isWalletConnected = false;
     let connectedWalletAddress = '';
 
