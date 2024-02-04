@@ -6,7 +6,7 @@
   <title>All Things Pulse Web3 Demo</title>
   <style>
     body {
-      background-color: #FFA500; /* Solid fluorescent orange */
+      position: relative;
       font-family: 'Cursive', sans-serif;
       text-align: center;
       margin: 0;
@@ -16,10 +16,34 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      overflow: hidden; /* Prevent scrollbars due to fixed border */
+      background: linear-gradient(135deg, #9400D3, #800080, #FFFF00);
+    }
+
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: url('web3background4.jpg') no-repeat center center / cover;
+      /* Replace 'your-local-image-file.jpg' with the path to your local image file */
+      z-index: -1;
+    }
+
+    .border {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border: 10px solid #333; /* Dark grey border around the perimeter */
+      pointer-events: none; /* Allow clicking through the border */
     }
 
     #app {
-      background: linear-gradient(135deg, #FFA500, #FFFF00);
+      background: linear-gradient(135deg, rgba(128, 0, 128, 0.5), rgba(255, 255, 0, 0.3));
       padding: 20px;
       border-radius: 10px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
